@@ -4,9 +4,13 @@ namespace RomanNumbers;
 
 use RomanNumbers\Logic\Roman;
 use RomanNumbers\Logic\Decimal;
-use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-
+/**
+ * Class RomanNumbersConverter
+ * @package RomanNumbers
+ *
+ * Exceptions here should be more business related
+ */
 class RomanNumbersConverter implements RomanNumeralGenerator {
 
     /**
@@ -19,7 +23,7 @@ class RomanNumbersConverter implements RomanNumeralGenerator {
         $romanLogic = new Decimal\Logic();
         try {
             return $romanLogic->convert($value);
-        } catch (InvalidValueException $e) {
+        } catch (\Exception $e) {
             //TODO: improve this catch
             echo $e->getMessage();
             return null;
@@ -36,7 +40,7 @@ class RomanNumbersConverter implements RomanNumeralGenerator {
         $decimalLogic = new Roman\Logic();
         try {
             return $decimalLogic->convert($value);
-        } catch (InvalidValueException $e) {
+        } catch (\Exception $e) {
             //TODO: improve this catch
             echo $e->getMessage();
             return null;

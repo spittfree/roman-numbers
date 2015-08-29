@@ -31,8 +31,17 @@ class Logic
      */
     public function convert($input)
     {
+        $this->validate($input);
         $symbols = $this->prepareArrayOfSymbols($input);
         return $this->processSymbols($symbols);
+    }
+
+    /**
+     * @param string $input
+     */
+    private function validate($input)
+    {
+        //TODO: Check if its valid or throw specific Exception
     }
 
     /**

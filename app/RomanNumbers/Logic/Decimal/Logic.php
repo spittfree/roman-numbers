@@ -57,8 +57,17 @@ class Logic
      */
     public function convert($input)
     {
+        $this->validate($input);
         $numbers = $this->prepareArrayOfNumbers($input);
         return $this->applyMappers($numbers);
+    }
+
+    /**
+     * @param string $input
+     */
+    private function validate($input)
+    {
+        //TODO: Check if its valid or throw specific Exception
     }
 
     /**
