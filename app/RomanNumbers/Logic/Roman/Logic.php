@@ -27,12 +27,25 @@ class Logic {
      */
     private $thousandsMapper;
 
-    public function __construct()
-    {
-        $this->unitsMapper = new UnitsMapper();
-        $this->tensMapper = new TensMapper();
-        $this->hundredsMapper = new HundredsMapper();
-        $this->thousandsMapper = new ThousandsMapper();
+    /**
+     * This constructor uses home-made dependency injection for testing purposes.
+     * I am trying to avoid any external libraries to manage this.
+     *
+     * @param UnitsMapper $unitsMapper
+     * @param TensMapper $tensMapper
+     * @param HundredsMapper $hundredsMapper
+     * @param ThousandsMapper $thousandsMapper
+     */
+    public function __construct(
+        UnitsMapper $unitsMapper = null,
+        TensMapper $tensMapper = null,
+        HundredsMapper $hundredsMapper = null,
+        ThousandsMapper $thousandsMapper = null
+    ) {
+        $this->unitsMapper = $unitsMapper ? : new UnitsMapper();
+        $this->tensMapper = $tensMapper ? : new TensMapper();
+        $this->hundredsMapper = $hundredsMapper ? : new HundredsMapper();
+        $this->thousandsMapper = $thousandsMapper? : new ThousandsMapper();
     }
 
     /**
