@@ -1,6 +1,6 @@
 <?php
 
-namespace RomanNumbers\Roman;
+namespace RomanNumbers\Mappers\Roman;
 
 class HundredsMapper extends Mapper {
 

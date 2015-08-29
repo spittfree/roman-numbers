@@ -1,10 +1,10 @@
 <?php
 
-namespace RomanNumbers\Roman;
+namespace RomanNumbers\Mappers\Roman;
 
 use Mappers\Exception\InvalidValueException;
 
-class Mapper {
+abstract class Mapper {
 
     const VALUE_FOR_0 = '';
     const VALUE_FOR_1 = '';

@@ -2,6 +2,8 @@
 
 namespace RomanNumbers;
 
+use RomanNumbers\Logic\Roman;
+
 
 class RomanNumbersConverter implements RomanNumeralGenerator {
 
@@ -12,7 +14,8 @@ class RomanNumbersConverter implements RomanNumeralGenerator {
      */
     public function generate($value)
     {
-        // TODO: Implement generate() method.
+        $romanLogic = new Roman\Logic();
+        return $romanLogic->convert($value);
     }
 
     /**
@@ -21,6 +24,6 @@ class RomanNumbersConverter implements RomanNumeralGenerator {
      */
     public function parse($value)
     {
-        // TODO: Implement parse() method.
+
     }
 }
