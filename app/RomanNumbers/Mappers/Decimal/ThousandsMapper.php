@@ -1,10 +1,11 @@
 <?php
 
-namespace RomanNumbers\Decimal;
+namespace RomanNumbers\Mappers\Decimal;
 
-use Mappers\Exception\InvalidValueException;
+use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-class ThousandsMapper extends Mapper{
+class ThousandsMapper
+{
 
     const VALUE_FOR_M = 1000;
 

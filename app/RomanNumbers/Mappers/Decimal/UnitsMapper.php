@@ -1,10 +1,11 @@
 <?php
 
-namespace RomanNumbers\Decimal;
+namespace RomanNumbers\Mappers\Decimal;
 
-use Mappers\Exception\InvalidValueException;
+use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-class UnitsMapper extends Mapper{
+class UnitsMapper
+{
 
     const VALUE_FOR_I = 1;
     const VALUE_FOR_V = 5;

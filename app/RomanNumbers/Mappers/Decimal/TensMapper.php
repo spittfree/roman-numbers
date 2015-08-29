@@ -1,10 +1,11 @@
 <?php
 
-namespace RomanNumbers\Decimal;
+namespace RomanNumbers\Mappers\Decimal;
 
-use Mappers\Exception\InvalidValueException;
+use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-class TensMapper extends Mapper{
+class TensMapper
+{
 
     const VALUE_FOR_X = 10;
     const VALUE_FOR_L = 50;
