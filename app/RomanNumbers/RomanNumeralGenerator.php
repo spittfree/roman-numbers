@@ -6,14 +6,14 @@ namespace RomanNumbers;
 interface RomanNumeralGenerator {
 
     /**
-     * Convert from Integer to Roman
+     * Convert from Integer to Decimal
      * @param int $value
      * @return string
      */
     public function generate($value);
 
     /**
-     * Convert from Roman to Integer
+     * Convert from Decimal to Integer
      * @param string $value
      * @return int
      */

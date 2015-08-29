@@ -2,10 +2,10 @@
 
 namespace RomanNumbers\Logic\Roman;
 
-use RomanNumbers\Mappers\Roman\UnitsMapper;
-use RomanNumbers\Mappers\Roman\TensMapper;
-use RomanNumbers\Mappers\Roman\HundredsMapper;
-use RomanNumbers\Mappers\Roman\ThousandsMapper;
+use RomanNumbers\Mappers\Decimal\UnitsMapper;
+use RomanNumbers\Mappers\Decimal\TensMapper;
+use RomanNumbers\Mappers\Decimal\HundredsMapper;
+use RomanNumbers\Mappers\Decimal\ThousandsMapper;
 use RomanNumbers\Mappers\Exception\InvalidValueException;
 
 class Logic {
