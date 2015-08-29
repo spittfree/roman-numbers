@@ -1,10 +1,11 @@
 <?php
 
-namespace RomanNumbers\Mappers\Decimal;
+namespace RomanNumbers\Mappers\Roman;
 
 use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-class SymbolsMapper {
+class SymbolsMapper
+{
 
     const I = 1;
     const V = 5;
@@ -17,8 +18,8 @@ class SymbolsMapper {
     /**
      * I hate to use switch but it is the simplest way to do it
      *
-     * @param int $value
-     * @return string
+     * @param string $value
+     * @return int
      * @throws InvalidValueException
      */
     public function convert($value)
@@ -28,7 +29,7 @@ class SymbolsMapper {
             case 'V': return self::V;
             case 'X': return self::X;
             case 'L': return self::L;
-            case 'C': return self::D;
+            case 'C': return self::C;
             case 'D': return self::D;
             case 'M': return self::M;
             default: throw new InvalidValueException();

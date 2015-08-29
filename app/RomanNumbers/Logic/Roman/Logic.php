@@ -2,96 +2,50 @@
 
 namespace RomanNumbers\Logic\Roman;
 
-use RomanNumbers\Mappers\Decimal\UnitsMapper;
-use RomanNumbers\Mappers\Decimal\TensMapper;
-use RomanNumbers\Mappers\Decimal\HundredsMapper;
-use RomanNumbers\Mappers\Decimal\ThousandsMapper;
+use RomanNumbers\Mappers\Roman\SymbolsMapper;
 use RomanNumbers\Mappers\Exception\InvalidValueException;
 
-class Logic {
-
+class Logic
+{
     /**
-     * @var UnitsMapper
+     * @var SymbolsMapper
      */
-    private $unitsMapper;
-    /**
-     * @var TensMapper
-     */
-    private $tensMapper;
-    /**
-     * @var HundredsMapper
-     */
-    private $hundredsMapper;
-    /**
-     * @var ThousandsMapper
-     */
-    private $thousandsMapper;
+    private $symbolsMapper;
 
     /**
      * This constructor uses home-made dependency injection for testing purposes.
      * I am trying to avoid any external libraries to manage this.
      *
-     * @param UnitsMapper $unitsMapper
-     * @param TensMapper $tensMapper
-     * @param HundredsMapper $hundredsMapper
-     * @param ThousandsMapper $thousandsMapper
+     * @param SymbolsMapper $symbolsMapper
      */
     public function __construct(
-        UnitsMapper $unitsMapper = null,
-        TensMapper $tensMapper = null,
-        HundredsMapper $hundredsMapper = null,
-        ThousandsMapper $thousandsMapper = null
-    ) {
-        $this->unitsMapper = $unitsMapper ? : new UnitsMapper();
-        $this->tensMapper = $tensMapper ? : new TensMapper();
-        $this->hundredsMapper = $hundredsMapper ? : new HundredsMapper();
-        $this->thousandsMapper = $thousandsMapper? : new ThousandsMapper();
+        SymbolsMapper $symbolsMapper = null
+    ){
+        $this->symbolsMapper = $symbolsMapper ? : new SymbolsMapper();
     }
 
     /**
-     * Logic to convert is pretty simple, just slice the decimal and map its values
-     * It is important to reverse the order to keep the roman number order
-     * @param int $input
-     * @return string
+     * @param string $input
+     * @return int
+     * @throws InvalidValueException
      */
     public function convert($input)
     {
-        $numbers = $this->prepareArrayOfNumbers($input);
-        return $this->applyMappers($numbers);
-    }
+        $symbols = str_split($input);
+        $symbols = array_reverse($symbols);
 
-    /**
-     * @param int $input
-     * @return array
-     */
-    private function prepareArrayOfNumbers($input)
-    {
-        $numbers = array_map('intval', str_split($input));
-        $numbers = array_reverse($numbers);
-        return $numbers;
-    }
+        $result = 0;
+        $lastSymbolValue = 0;
 
-    /**
-     * @param array $numbers
-     * @return string
-     * @throws InvalidValueException
-     */
-    private function applyMappers($numbers)
-    {
-        $result = '';
-        if (isset($numbers[3])) {
-            $result = $result . $this->thousandsMapper->convert($numbers[3]);
+        foreach ($symbols as $symbol) {
+            if ($lastSymbolValue <= $this->symbolsMapper->convert($symbol)) {
+                $result = $result + $this->symbolsMapper->convert($symbol);
+            } else {
+                $result = $result - $this->symbolsMapper->convert($symbol);
+            }
+            $lastSymbolValue = $this->symbolsMapper->convert($symbol);
         }
-        if (isset($numbers[2])) {
-            $result = $result . $this->hundredsMapper->convert($numbers[2]);
-        }
-        if (isset($numbers[1])) {
-            $result = $result . $this->tensMapper->convert($numbers[1]);
-        }
-        if (isset($numbers[0])) {
-            $result = $result . $this->unitsMapper->convert($numbers[0]);
-            return $result;
-        }
+
         return $result;
     }
 }
