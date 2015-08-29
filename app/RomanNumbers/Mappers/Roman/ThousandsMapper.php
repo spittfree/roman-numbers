@@ -2,7 +2,7 @@
 
 namespace RomanNumbers\Mappers\Roman;
 
-use Mappers\Exception\InvalidValueException;
+use \RomanNumbers\Mappers\Exception\InvalidValueException;
 
 class ThousandsMapper extends Mapper {
 
@@ -25,7 +25,12 @@ class ThousandsMapper extends Mapper {
             case 1: return self::VALUE_FOR_1;
             case 2: return self::VALUE_FOR_2;
             case 3: return self::VALUE_FOR_3;
-            default: throw new InvalidValueException();
+            default: throw new InvalidValueException(
+                sprintf(
+                    'Value %s is not valid or its above the allowed threshold',
+                    $value
+                )
+            );
         }
     }
 }

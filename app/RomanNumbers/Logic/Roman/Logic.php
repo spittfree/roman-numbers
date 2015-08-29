@@ -41,20 +41,20 @@ class Logic {
     public function convert($input)
     {
         $result = '';
-
         $numbers  = array_map('intval', str_split($input));
+        $numbers = array_reverse($numbers);
 
-        if (isset($numbers[0])) {
-            $result = $result . $this->unitsMapper->convert($numbers[0]);
-        }
-        if (isset($numbers[1])) {
-            $result = $result . $this->tensMapper->convert($numbers[1]);
+        if (isset($numbers[3])) {
+            $result = $result . $this->thousandsMapper->convert($numbers[3]);
         }
         if (isset($numbers[2])) {
             $result = $result . $this->hundredsMapper->convert($numbers[2]);
         }
-        if (isset($numbers[3])) {
-            $result = $result . $this->thousandsMapper->convert($numbers[3]);
+        if (isset($numbers[1])) {
+            $result = $result . $this->tensMapper->convert($numbers[1]);
+        }
+        if (isset($numbers[0])) {
+            $result = $result . $this->unitsMapper->convert($numbers[0]);
         }
 
         return $result;
