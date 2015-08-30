@@ -12,7 +12,6 @@ function autoload($className)
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    //echo dirname(__FILE__) .'\\'. $fileName;
     $route = dirname(__FILE__) .'\\'. $fileName;
     $route = str_replace('\\','/', $route);
     require $route;
