@@ -76,12 +76,13 @@ class Logic
      */
     private function prepareArrayOfNumbers($input)
     {
-        $numbers = array_map('intval', str_split($input));
-        $numbers = array_reverse($numbers);
-        return $numbers;
+        return array_reverse(
+            array_map('intval', str_split($input))
+        );
     }
 
     /**
+     * A bit hardcoded
      * @param array $numbers
      * @return string
      * @throws InvalidValueException
