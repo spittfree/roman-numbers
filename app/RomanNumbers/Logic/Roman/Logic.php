@@ -48,13 +48,13 @@ class Logic
      * This functions decides if the Symbol should be added or subtracted
      *
      * @param int $lastSymbolValue
-     * @param string $symbol
+     * @param int $symbolValue
      * @return bool
      * @throws InvalidValueException
      */
-    private function shouldBeAdded($lastSymbolValue, $symbol)
+    private function shouldBeAdded($lastSymbolValue, $symbolValue)
     {
-        return $lastSymbolValue <= $this->symbolsMapper->convert($symbol);
+        return $lastSymbolValue <= $symbolValue;
     }
 
     /**
@@ -63,9 +63,9 @@ class Logic
      */
     private function prepareArrayOfSymbols($input)
     {
-        $symbols = str_split($input);
-        $symbols = array_reverse($symbols);
-        return $symbols;
+        return array_reverse(
+            str_split($input)
+        );
     }
 
     /**
@@ -79,12 +79,25 @@ class Logic
         $lastSymbolValue = 0;
 
         foreach ($symbols as $symbol) {
-            if ($this->shouldBeAdded($lastSymbolValue, $symbol)) {
-                $result += $this->symbolsMapper->convert($symbol);
-            } else {
-                $result -= $this->symbolsMapper->convert($symbol);
-            }
-            $lastSymbolValue = $this->symbolsMapper->convert($symbol);
+            $symbolValue = $this->symbolsMapper->convert($symbol);
+            $result = $this->processSymbolValue($lastSymbolValue, $symbolValue, $result);
+            $lastSymbolValue = $symbolValue;
+        }
+        return $result;
+    }
+
+    /**
+     * @param int $lastSymbolValue
+     * @param int $symbolValue
+     * @param int $result
+     * @return int
+     */
+    private function processSymbolValue($lastSymbolValue, $symbolValue, $result)
+    {
+        if ($this->shouldBeAdded($lastSymbolValue, $symbolValue)) {
+            $result += $symbolValue;
+        } else {
+            $result -= $symbolValue;
         }
         return $result;
     }
