@@ -1,5 +1,5 @@
 angular.module('numbersApp', [])
-    .controller('converter', function($scope, $http) {
+    .controller('converterToRoman', function($scope, $http) {
 
         $scope.input = '';
         $scope.errorMessage = '';
